@@ -1,0 +1,15 @@
+# Arquivos compilados Java
+*.class
+bin/
+target/
+
+# Eclipse
+.metadata/
+.recommenders/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
