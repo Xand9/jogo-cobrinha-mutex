@@ -43,6 +43,7 @@ public class Jogo extends JPanel implements Runnable
 
     public Jogo()
     {
+    	
         // cria o semáforo que será usado como Mutex
         Mutex = new Semaphore(1);
 
@@ -59,6 +60,9 @@ public class Jogo extends JPanel implements Runnable
         imagemFundo = new ImageIcon("imagens/fundo.png").getImage();
         imagemFimJogo = new ImageIcon("imagens/fim_jogo.png").getImage();
         imagemBotaoFim = new ImageIcon("imagens/botao_fim.png").getImage();
+        
+        //// inicia a música de fundo
+        Som.tocarMusicaFundo("sons/musica_fundo.wav");
 
         // adiciona o leitor de teclado
         addKeyListener(new Teclado());
@@ -88,9 +92,10 @@ public class Jogo extends JPanel implements Runnable
                             mouseY >= BOTAO_FIM_Y &&
                             mouseY <= BOTAO_FIM_Y + BOTAO_FIM_ALTURA;
 
-                    if (clicouNoBotaoFim) {
-                        System.exit(0);
-                    }
+                            if (clicouNoBotaoFim) {
+                                Som.pararMusicaFundo();
+                                System.exit(0);
+                            }
                 }
             }
         });
