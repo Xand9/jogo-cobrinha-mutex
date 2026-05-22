@@ -26,9 +26,9 @@ public class Jogo extends JPanel implements Runnable
     private final int BOTAO_FIM_X = (LARGURA_TELA - BOTAO_FIM_LARGURA) / 2;
     private final int BOTAO_FIM_Y = (ALTURA_TELA / 2) + 170;
     
-    public static final int LARGURA_TELA = 1300;
-    public static final int ALTURA_TELA = 750;
-    public static final int TAMANHO_BLOCO = 50;
+    public static final int LARGURA_TELA = 1000;
+    public static final int ALTURA_TELA = 600;
+    public static final int TAMANHO_BLOCO = 40;
     public static final int UNIDADES = LARGURA_TELA * ALTURA_TELA / (TAMANHO_BLOCO * TAMANHO_BLOCO);
     public static final int INTERVALO = 200;
     public static final String NOME_FONTE = "Ink Free";
