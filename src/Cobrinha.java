@@ -1,13 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.io.File;
-import java.io.IOException;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Cobrinha
 {
@@ -81,27 +74,13 @@ public class Cobrinha
         // *** liberar região crítica
         Jogo.Mutex.release();
     }
-
-    public void TocarEfeito() throws LineUnavailableException, IOException, UnsupportedAudioFileException
-    {
-        File arquivo = new File("SomPontuacao.wav");
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(arquivo);
-
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-    }
-
-    public boolean alcancouComida() throws LineUnavailableException, IOException, UnsupportedAudioFileException
+    public boolean alcancouComida()
     {
         // verificar se atingiu a comida
         if (eixoX[0] == Comida.posicao_x && eixoY[0] == Comida.posicao_y)
         {
             TamanhoDaCobra++;
             QuantidadeComida++;
-
-            // som
-            // TocarEfeito();
 
             return true;
         }

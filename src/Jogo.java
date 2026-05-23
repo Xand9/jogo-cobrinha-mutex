@@ -5,19 +5,18 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.io.IOException;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.Semaphore;//controlar acesso a uma região crítica
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
-public class Jogo extends JPanel implements Runnable
-{
-    private Image imagemFundo;
+public class Jogo extends JPanel implements Runnable 
+//“Crie uma classe pública chamada Jogo, que é um painel gráfico (JPanel) e que também pode ser 
+//executada por uma thread (Runnable).”
+{									
+    private Image imagemFundo;											
     private Image imagemFimJogo;
     private Image imagemBotaoFim;
 
@@ -25,6 +24,7 @@ public class Jogo extends JPanel implements Runnable
     private final int BOTAO_FIM_ALTURA = 80;
     private final int BOTAO_FIM_X = (LARGURA_TELA - BOTAO_FIM_LARGURA) / 2;
     private final int BOTAO_FIM_Y = (ALTURA_TELA / 2) + 170;
+    	//private = encapsulamento 
     
     public static final int LARGURA_TELA = 1000;
     public static final int ALTURA_TELA = 600;
@@ -32,9 +32,11 @@ public class Jogo extends JPanel implements Runnable
     public static final int UNIDADES = LARGURA_TELA * ALTURA_TELA / (TAMANHO_BLOCO * TAMANHO_BLOCO);
     public static final int INTERVALO = 200;
     public static final String NOME_FONTE = "Ink Free";
-
+    	//final = Depois que esse valor for definido, ele não pode mais ser alterado.
+    
     public static Semaphore Mutex;
-
+    	//Semáforo público, pertencente à classe Jogo, chamado Mutex
+    
     private int segundos = 0;
     private Timer cronometro;
     private Cobrinha objetoCobra;
@@ -114,15 +116,10 @@ public class Jogo extends JPanel implements Runnable
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-
-        try {
-            desenharTela(g);
-        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        }
+        desenharTela(g);
     }
 
-    public void desenharTela(Graphics g) throws LineUnavailableException, IOException, UnsupportedAudioFileException
+    public void desenharTela(Graphics g)
     {
         if (GameOver == false)
         {
@@ -204,14 +201,9 @@ public class Jogo extends JPanel implements Runnable
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
-
-            try {
-                if (objetoCobra.alcancouComida() == true)
-                {
-                    objetoComida.CriarNovaPosicao();
-                }
-            } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-                e.printStackTrace();
+            if (objetoCobra.alcancouComida() == true)
+            {
+                objetoComida.CriarNovaPosicao();
             }
 
             GameOver = objetoCobra.VerificarGameOver();
